@@ -45,7 +45,7 @@
 }
 
 .finder {
-    
+    margin: 0 0 30px;
 }
 
 .tag {
@@ -177,7 +177,7 @@
     cursor: pointer;
 
     &__icon {
-        background-image: url("/../public/img/plus.png");
+        background-image: url("img/plus.png");
         background-size: cover;
         width: 100px;
         height: 100px;

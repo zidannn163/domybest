@@ -54,6 +54,10 @@
   margin-bottom: 10px;
 }
 
+.finder {
+  margin: 0 0 30px;
+}
+
 .tag {
   display: block;
   text-transform: none;
@@ -195,7 +199,7 @@
 }
 
 .new-post__icon {
-  background-image: url("/../public/img/plus.png");
+  background-image: url("img/plus.png");
   background-size: cover;
   width: 100px;
   height: 100px;
