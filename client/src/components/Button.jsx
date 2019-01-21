@@ -1,20 +1,41 @@
-import React from 'react';
+
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-
 const propTypes = {
-    settings: PropTypes.shape({
-        buttonName: PropTypes.string.isRequired,
-        buttonClass: PropTypes.string.isRequired,
-        buttonFunc: PropTypes.func.isRequired,
-    }).isRequired
+    buttonName: PropTypes.string.isRequired,
+    buttonClass: PropTypes.string.isRequired,
+    func: PropTypes.func,
+    params: PropTypes.array
+    
 };
 
+const defaultProps = {
+    func: () => {},
+    params: []
+}
 
-const Button = (props) => <button className={props.settings.buttonClass} onClick={props.settings.buttonFunc}>{props.settings.buttonName}</button>;
+
+
+class Button extends Component {
+
+
+    
+
+    handlerClick = (e) => {
+        console.log(e)
+        e.preventDefault();
+        this.props.func(...this.props.params);
+    }
+
+    render() {
+        return <button onClick={this.handlerClick} className={this.props.buttonClass} >{this.props.buttonName}</button>
+    }
+}
 
 
 Button.propTypes = propTypes;
+Button.defaultProps = defaultProps;
 
 
 export default Button;

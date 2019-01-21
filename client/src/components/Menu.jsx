@@ -2,72 +2,61 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import MenuBlock from './MenuBlock';
+import Button from './Button'
 import Finder from './Finder';
+import Tag from './Tag';
+
+
 const propTypes = {
+    popTags: PropTypes.array,
+    func: PropTypes.shape({
+        download: PropTypes.func.isRequired,
+        findPostByTag: PropTypes.func.isRequired,
+        findFunc: PropTypes.func.isRequired,
+        findPostByTagName: PropTypes.func.isRequired,
+    }).isRequired,
     
 };
+const defaultProps = {
+    popTags: []
+}
 
 
-const Menu = () => {
+const Menu = (props) => {
+
+
     return (
         <div className="menu">
-            <MenuBlock buttons={[{}]} menuTitle={"Отобразить список постов"}/>
-            <MenuBlock buttons={[{}]} menuTitle={"Отображать по:"}/>
-            <MenuBlock buttons={[{}]} menuTitle={"Сортировать по:"}/>
+            <MenuBlock title={'Отобразить список постов'}>
+                <div className="buttons">
+                    <Button buttonName={'Поиск'} 
+                            buttonClass={'button_stnd button'}  
+                            func={ props.func.download }/>
+                </div>
+            </MenuBlock>
 
-            <Finder findFunc={null} finderLabel={'Поиск по слову в названи'} />
-            <MenuBlock buttons={[{}]} menuTitle={"Отобразить список постов"}/>
-            <Finder findFunc={null} finderLabel={'Поиск по тегам'} />
 
-            {/* <div className="menu__block">
-                <div className="menu__title">Отобразить список постов</div>
-                <div className="buttons">
-                    <button className="button_stnd button">Начать</button>
-                </div>
-            </div>
-            <div className="menu__block">
-                <div className="menu__title">Отображать по:</div>
-                <div className="buttons">
-                    <button className="button_stnd button">10</button>
-                    <button className="button_stnd button">25</button>
-                    <button className="button_stnd button">50</button>
-                </div>
-            </div>
-            <div className="menu__block">
-                <div className="menu__title">Сортировать по:</div>
-                <div className="buttons">
-                    <button className="button_stnd button">Дате</button>
-                </div>
-            </div>
-            <form className="finder ">
-                <lable className="finder__title">Поиск по слову в названи</lable>
-                <input />
-                <div className="buttons">
-                    <button className="button_stnd button">Поиск</button>
-                </div>
-            </form>
-            <div className="menu__block">
-                <div className="menu__title">Популярные теги:</div>
+
+            <Finder findFunc={props.func.findFunc} finderLabel={'Поиск по слову в названии'} />
+
+            <MenuBlock title={'Список тегов'}>
                 <div className="tags">
-                    <a href="#" className="tag">#Путин</a>
-                    <a href="#" className="tag">#Украина</a>
-                    <a href="#" className="tag">#fuckyourselfchallenge</a>
-                    <a href="#" className="tag">#superman</a>
-                    <a href="#" className="tag">#guitar</a>
-                    <a href="#" className="tag">#Instagramm</a>
+                    {props.popTags.map((tag) => <Tag key={tag.id} id={tag.id} tag={tag.tag} func={props.func.findPostByTag} />)}
                 </div>
-            </div>
-            <form className="finder ">
-                <lable className="finder__title">Поиск по тегам</lable>
-                <input />
-                <button className="finder__button button_stnd button">Поиск</button>
-            </form> */}
+            </MenuBlock>
+
+            <Finder findFunc={props.func.findPostByTagName} finderLabel={'Поиск по тегам'} />
+
+
         </div>
     );
 };
 
 
 Menu.propTypes = propTypes;
+Menu.defaultProps = defaultProps;
 
 
 export default Menu;
+
+
